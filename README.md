@@ -1,2 +1,2 @@
 # article
-changed
+local changed
