@@ -13,3 +13,11 @@ $ sudo /sbin/swapon /var/swap.1<br>
 $ free<br>
 $ php composer.phar create-project --prefer-dist laravel/laravel nomad "5.8.*"<br>
 $ php artisan --version
+
+# 初期設定
+### app/config.php
+'timezon' => 'timezone' => 'Asia/Tokyo',<br>
+UTCからAisa/Tokyoに変更<br>
+
+'locale' => 'ja',<br>
+localをenからjaに変更
