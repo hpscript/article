@@ -16,7 +16,7 @@ $ php artisan --version
 
 # 初期設定
 ### app/config.php
-'timezon' => 'timezone' => 'Asia/Tokyo',<br>
+'timezone' => 'Asia/Tokyo',<br>
 UTCからAisa/Tokyoに変更<br>
 
 'locale' => 'ja',<br>
