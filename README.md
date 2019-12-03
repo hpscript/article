@@ -1,4 +1,5 @@
 # laravel環境構築
+Laravel is a PHP web framework uses the MVC architecture
 ### composerインストーラ
 $ curl -sS https://getcomposer.org/installer | php
 
