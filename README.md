@@ -22,3 +22,6 @@ UTCからAisa/Tokyoに変更<br>
 
 'locale' => 'ja',<br>
 localをenからjaに変更
+
+### Class * not found
+$ php composer.phar dump-autoload
