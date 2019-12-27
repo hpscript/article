@@ -17,11 +17,15 @@ $ php artisan --version
 
 # 初期設定
 ### config/app.php
-'timezone' => 'Asia/Tokyo',<br>
-UTCからAisa/Tokyoに変更<br>
-
-'locale' => 'ja',<br>
-localをenからjaに変更
+```
+'timezone' => 'Asia/Tokyo',
+'locale' => 'ja',
+'fallback_locale' => 'ja',
+'faker_locale' => 'ja_JP',
+```
+$ php artisan tinker<br>
+>>> echo Carbon\Carbon::now();<br>
+>>> app(\Faker\Generator::class)->name;
 
 ### Class * not found
 $ php composer.phar dump-autoload
