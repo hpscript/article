@@ -16,7 +16,7 @@ $ php composer.phar create-project --prefer-dist laravel/laravel nomad "6.8.0"<b
 $ php artisan --version
 
 # 初期設定
-### app/config.php
+### config/app.php
 'timezone' => 'Asia/Tokyo',<br>
 UTCからAisa/Tokyoに変更<br>
 
