@@ -51,6 +51,6 @@ $ php composer.phar install<br>
 .env<br>
 $ php artisan key:generate<br>
 
-// mysql
+// mysql<br>
 mysql> create database ***_dev<br>
 mysql> use ***_dev<br>
