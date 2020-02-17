@@ -43,6 +43,7 @@ $ php composer.phar dump-autoload
 
 ### プロジェクトの複製
 $ git clone https://github.com/***/***.git<br>
+$ cd ***<br>
 $ git branch ${issue}<br>
 $ git checkout ${issue}<br>
 // vendorの作成<br>
