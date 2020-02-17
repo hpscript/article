@@ -55,3 +55,7 @@ $ php artisan key:generate<br>
 // mysql<br>
 mysql> create database ***_dev<br>
 mysql> use ***_dev<br>
+// 初期テーブルの設定
+
+$ php artisan migrate<br>
+$ php composer.phar dump-autoload
