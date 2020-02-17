@@ -48,7 +48,7 @@ $ git branch ${issue}<br>
 $ git checkout ${issue}<br>
 // vendorの作成<br>
 $ php composer.phar install<br>
-// .envファイルの作成<br>
+// .envファイルの作成　※.env.exampleの複製ではなく、必要に応じてMAIL_DRIVER、AWS_ACCESS_KEY、PUSHER_APP_IDなどを記述する<br>
 .env<br>
 $ php artisan key:generate<br>
 
