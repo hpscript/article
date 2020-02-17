@@ -41,7 +41,15 @@ DB_PASSWORD=
 $ php composer.phar dump-autoload
 
 
-### git clone
+### プロジェクトの複製
 $ git clone https://github.com/***/***.git<br>
 $ git branch ${issue}<br>
-$ git checkout ${issue}
+$ git checkout ${issue}<br>
+// vendorの作成<br>
+$ php composer.phar install<br>
+// .envファイルの作成<br>
+.env<br>
+$ php artisan key:generate<br>
+
+// mysql
+create database ***_dev;<br>
