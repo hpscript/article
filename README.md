@@ -52,4 +52,5 @@ $ php composer.phar install<br>
 $ php artisan key:generate<br>
 
 // mysql
-create database ***_dev;<br>
+mysql> create database ***_dev<br>
+mysql> use ***_dev<br>
