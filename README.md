@@ -39,3 +39,9 @@ DB_PASSWORD=
 
 ### Class * not found
 $ php composer.phar dump-autoload
+
+
+### git clone
+$ git clone https://github.com/***/***.git<br>
+$ git branch ${issue}<br>
+$ git checkout ${issue}
