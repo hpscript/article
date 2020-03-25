@@ -8,10 +8,10 @@ $ php composer.phar create-project --prefer-dist laravel/laravel ${projectName}<
 $ php artisan --version
 
 ### make:auth
-$ php composer.phar require laravel/ui
-$ php artisan ui vue --auth
-$ php artisan migrate
-$ npm install
+$ php composer.phar require laravel/ui<br>
+$ php artisan ui vue --auth<br>
+$ php artisan migrate<br>
+$ npm install<br>
 $ npm run dev
 
 ### Cannot allocate memoryのエラーが出た時
