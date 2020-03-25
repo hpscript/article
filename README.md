@@ -4,8 +4,15 @@ Laravel is a PHP web framework uses the MVC architecture
 $ curl -sS https://getcomposer.org/installer | php
 
 ### Composer Create-Project
-$ php composer.phar create-project --prefer-dist laravel/laravel nomad "6.8.0"<br>
+$ php composer.phar create-project --prefer-dist laravel/laravel ${projectName}<br>
 $ php artisan --version
+
+### make:auth
+$ php composer.phar require laravel/ui
+$ php artisan ui vue --auth
+$ php artisan migrate
+$ npm install
+$ npm run dev
 
 ### Cannot allocate memoryのエラーが出た時
 $ sudo /bin/dd if=/dev/zero of=/var/swap.1 bs=1M count=1024<br>
