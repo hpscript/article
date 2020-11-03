@@ -66,3 +66,102 @@ mysql> use ***_dev<br>
 
 $ php artisan migrate<br>
 $ php composer.phar dump-autoload
+
+
+# Laravel8.x環境構築手順
+### 1.vagrant initからsshログインまで
+$ mkdir amazonlinux2<br>
+$ cd amazonlinux2<br>
+$ vagrant init gbailey/amzn2<br>
+$ vi vagrantfile<br>
+// 35行目ポートフォワーディング解除
+```
+config.vm.network "private_network", ip: "192.168.33.10"
+```
+$ vagrant up<br>
+$ vagrant ssh-config --host 192.168.33.10<br>
+$ vagrant ssh<br>
+// sshログイン後<br>
+$ cat /etc/*release<br>
+$ sudo yum update
+
+### 2.Gitインストール(2.29.2)
+$ sudo yum -y install gcc curl-devel expat-devel gettext-devel openssl-devel zlib-devel perl-ExtUtils-MakeMaker autoconf<br>
+// ダウンロード対象を確認(https://mirrors.edge.kernel.org/pub/software/scm/git/) <br>
+// 11月3日時点で最新のgit2.29.2を入れる<br>
+$ cd /usr/local/src/<br>
+$ sudo wget https://mirrors.edge.kernel.org/pub/software/scm/git/git-2.29.2.tar.gz  <br>
+$ sudo tar xzvf git-2.29.2.tar.gz<br>
+$ sudo rm -rf git-2.29.2.tar.gz<br>
+$ cd git-2.29.2<br>
+$ sudo make prefix=/usr/local all<br>
+$ sudo make prefix=/usr/local install<br>
+$ git --version<br>
+git version 2.29.2
+
+### 3.Node.jsインストール(v11.15.0)
+// 11系を入れる<br>
+$ curl --silent --location https://rpm.nodesource.com/setup_11.x | sudo bash -<br>
+$ yum install -y gcc-c++ make<br>
+$ sudo yum install -y nodejs<br>
+$ node --version<br>
+$ npm --version
+
+### 4.Apacheインストール(Apache/2.4.46)
+$ sudo yum install httpd<br>
+$ sudo systemctl start httpd<br>
+$ sudo systemctl status httpd<br>
+$ sudo systemctl enable httpd<br>
+$ sudo systemctl is-enabled httpd<br>
+$ httpd -v
+
+### 5.PHP7.4インストール ※laravel8.xはPHP >= 7.3
+$ amazon-linux-extras<br>
+$ amazon-linux-extras info php7.4<br>
+$ sudo amazon-linux-extras install php7.4<br>
+$ yum list php* | grep amzn2extra-php7.4<br>
+$ sudo yum install php-cli php-pdo php-fpm php-json php-mysqlnd php-mbstring php-xml<br>
+$ php -v<br>
+PHP 7.4.11 (cli) (built: Oct 21 2020 19:12:26) ( NTS )
+
+### 6.MySQL(8.0.22)
+$ sudo yum install https://dev.mysql.com/get/mysql80-community-release-el7-3.noarch.rpm<br>
+$ sudo yum install --enablerepo=mysql80-community mysql-community-server<br>
+$ sudo systemctl start mysqld<br>
+// パスワード変更<br>
+$ sudo cat /var/log/mysqld.log | grep "temporary password"<br>
+$ mysql -u root -p<br>
+mysql> ALTER USER 'root'@'localhost' IDENTIFIED BY '${temporary password}';<br>
+mysql> SET GLOBAL validate_password.length=6;<br>
+mysql> SET GLOBAL validate_password.policy=LOW;<br>
+mysql> ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '${new password}';<br>
+$ sudo systemctl enable mysqld<br>
+$ mysql -u root -p
+
+### 7.Ansible(2.9.13)
+$ sudo amazon-linux-extras install ansible2<br>
+$ ansible --version
+
+### 8.Ruby(2.7.2)
+$ git clone https://github.com/sstephenson/rbenv.git ~/.rbenv<br>
+$ git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build<br>
+$ echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bash_profile<br>
+$ echo 'eval "$(rbenv init -)"' >> ~/.bash_profile<br>
+$ source ~/.bash_profile<br>
+// rbenvは時間がかかるので注意　痺れを切らさず待ちます<br>
+$ rbenv install 2.7.2<br>
+$ rbenv rehash<br>
+$ sudo yum install rubygems<br>
+$ gem update –system 2.7.2
+
+### 9.AmazonLinux2 timezone変更
+$ date<br>
+$ cat /etc/localtime<br>
+$ sudo vi /etc/sysconfig/clock
+```
+ZONE="Asia/Tokyo" 
+UTC=false
+```
+$ sudo cp /etc/sysconfig/clock /etc/sysconfig/clock.org<br>
+$ strings /etc/localtime<br>
+$ date
