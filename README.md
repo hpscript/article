@@ -165,3 +165,87 @@ UTC=false
 $ sudo cp /etc/sysconfig/clock /etc/sysconfig/clock.org<br>
 $ strings /etc/localtime<br>
 $ date
+
+### プロジェクト作成
+$ composer create-project --prefer-dist laravel/laravel nonemail<br>
+$ cd nonemail<br>
+$ composer require laravel/jetstream<br>
+$ php artisan jetstream:install livewire<br>
+mysql> create database nonemail;<br>
+.env
+```
+DB_DATABASE=nonemail
+```
+$ php artisan migrate<br>
+$ npm install && npm run dev
+
+config/fortify.php
+```
+'username' => 'name',
+```
+resources/views/auth/login.blade.php
+```
+            <div>
+                <x-jet-label for="name" value="{{ __('Name') }}" />
+                <x-jet-input id="name" class="block mt-1 w-full" type="name" name="name" :value="old('name')" required autofocus />
+            </div>
+```
+
+$ php artisan serve --host 192.168.33.10 --port 8000<br>
+// 動作確認
+
+$ php artisan make:migration change_users_table_column_email_nullable  --table=users<br>
+2020_11_20_024033_change_users_table_column_email_nullable.php
+```
+public function up()
+    {
+        Schema::table('users', function (Blueprint $table) {
+            //
+            $table->dropUnique('users_email_unique');
+            $table->string('name')->unique()->change();
+            $table->string('email')->nullable()->change();
+        });
+    }
+```
+$ composer require doctrine/dbal<br>
+$ php artisan migrate<br>
+mysql> describe users;
+
+
+
+
+app/Actions/Fortify/CreateNewUser.php<br>
+ L nameを'required', 'unique:users'にする<br>
+ L emailから'required'を削除し、'nullable'を追加
+```
+    public function create(array $input)
+    {
+        Validator::make($input, [
+            'name' => ['required', 'string', 'max:255', 'unique:users'],
+            'email' => ['nullable', 'string', 'email', 'max:255'],
+            'password' => $this->passwordRules(),
+        ])->validate();
+
+        return User::create([
+            'name' => $input['name'],
+            'email' => $input['email'],
+            'password' => Hash::make($input['password']),
+        ]);
+    }
+```
+
+### tinkerで入れる場合
+php artisan tinker<br>
+$user = new App\Models\User();<br>
+$user->password = Hash::make('password');<br>
+$user->name = 'yamada';<br>
+$user->save();
+
+### sql文で入れる場合
+passwordをhash化する
+```
+$hashedpassword = password_hash('fugagua', PASSWORD_DEFAULT);
+```
+
+hash化したパスワードをインサート<br>
+INSERT INTO users (name, password, created_at, updated_at) VALUES ("ito", "$2y$10$1Wix04F*********", "2020-11-20 03:23:47", "2020-11-20 03:23:47");
