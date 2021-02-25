@@ -3,6 +3,23 @@ Laravel is a PHP web framework uses the MVC architecture
 ### composerインストーラ
 $ curl -sS https://getcomposer.org/installer | php
 
+### laravel8 update
+$ php artisan serve --host 192.168.33.10 --port 8000
+
+jetstream install<br>
+$ php composer.phar require laravel/jetstream<br>
+$ sudo mv composer.phar /usr/local/bin/composer<br>
+$ php artisan jetstream:install livewire<br>
+$ php artisan migrate
+
+$ sudo npm install -g n<br>
+$ sudo n stable<br>
+$ node -v<br>
+v14.15.0<br>
+$ npm run dev
+
+$ php artisan serve –host 192.168.33.10 –port 8000
+
 ### Composer Create-Project
 $ php composer.phar create-project --prefer-dist laravel/laravel ${projectName}<br>
 $ php artisan --version
