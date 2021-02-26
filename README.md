@@ -7,6 +7,7 @@ $ curl -sS https://getcomposer.org/installer | php
 $ php artisan serve --host 192.168.33.10 --port 8000
 
 jetstream install<br>
+$ composer create-project --prefer-dist laravel/laravel ${project}
 $ php composer.phar require laravel/jetstream<br>
 $ sudo mv composer.phar /usr/local/bin/composer<br>
 $ php artisan jetstream:install livewire<br>
