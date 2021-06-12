@@ -17,6 +17,7 @@ $ sudo npm install -g n<br>
 $ sudo n stable<br>
 $ node -v<br>
 v14.15.0<br>
+$ npm install<br>
 $ npm run dev
 
 $ php artisan serve –host 192.168.33.10 –port 8000
